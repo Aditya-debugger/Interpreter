@@ -198,14 +198,19 @@ impl Interpreter {
 
 fn main() {
     loop {
-        let mut input = String::new();
-        print!("Enter expression: ");
+        let mut input = String::new(); 
+        print!("Enter expression or type 'exit' to quit: ");
         io::stdout().flush().unwrap();
         io::stdin().read_line(&mut input).unwrap();
 
         let input = input.trim().to_string();
         if input.is_empty() {
             continue;
+        }
+
+        if input.eq_ignore_ascii_case("exit") {
+            println!("Exiting...");
+            break;
         }
 
         let mut lexer = Lexer::new(input);
@@ -221,3 +226,4 @@ fn main() {
         println!("Result: {}", result);
     }
 }
+
